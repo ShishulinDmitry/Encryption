@@ -1,0 +1,112 @@
+\hypertarget{crypt_8c}{}\doxysection{src/crypt.c File Reference}
+\label{crypt_8c}\index{src/crypt.c@{src/crypt.c}}
+{\ttfamily \#include $<$stdio.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/aes.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/rand.\+h$>$}\newline
+{\ttfamily \#include $<$string.\+h$>$}\newline
+{\ttfamily \#include $<$stdint.\+h$>$}\newline
+{\ttfamily \#include $<$inttypes.\+h$>$}\newline
+{\ttfamily \#include \char`\"{}crypt.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+Include dependency graph for crypt.\+c\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{crypt_8c_ae7357528156b2ef267ac89ea1f0fd8ce}{encryption}} (const char $\ast$filename, const unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em AES-\/256 encryption in CBC (Cipher Block Chaining) mode. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{crypt_8c_a4f287a69594a6d5c261336e67ffbe0b6}{decryption}} (const char $\ast$filename, const unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em AES-\/256 decryption in CBC (Cipher Block Chaining) mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{crypt_8c_a4f287a69594a6d5c261336e67ffbe0b6}\label{crypt_8c_a4f287a69594a6d5c261336e67ffbe0b6}} 
+\index{crypt.c@{crypt.c}!decryption@{decryption}}
+\index{decryption@{decryption}!crypt.c@{crypt.c}}
+\doxysubsubsection{\texorpdfstring{decryption()}{decryption()}}
+{\footnotesize\ttfamily void decryption (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+AES-\/256 decryption in CBC (Cipher Block Chaining) mode. 
+
+Conceptual Algorithm for {\ttfamily decryption} Function\+:
+
+
+\begin{DoxyEnumerate}
+\item Setup\+:
+\begin{DoxyItemize}
+\item Verify that the filename ends with \char`\"{}.\+enc\char`\"{}.
+\item Prepare the decryption key ({\ttfamily decryption\+\_\+key}) using the provided {\ttfamily key}.
+\item Create a new filename by replacing the \char`\"{}.\+enc\char`\"{} extension with \char`\"{}.\+dec\char`\"{}.
+\item Open the encrypted file ({\ttfamily file}) for reading and the output file ({\ttfamily dec\+\_\+file}) for writing.
+\item Read the Initialization Vector (IV) from the beginning of the encrypted file.
+\end{DoxyItemize}
+\item Decryption\+:
+\begin{DoxyItemize}
+\item Read the encrypted file in blocks of {\ttfamily AES\+\_\+\+BLOCK\+\_\+\+SIZE}.
+\item For each block\+:
+\begin{DoxyItemize}
+\item Decrypt the block using AES-\/256 in CBC mode with the {\ttfamily decryption\+\_\+key} and the IV.
+\item Write the decrypted block to the output file.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item Cleanup\+:
+\begin{DoxyItemize}
+\item Close both input and output files.
+\item Print a success message.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to decrypt (must end with \char`\"{}.\+enc\char`\"{}). \\
+\hline
+{\em key} & The decryption key (256 bits). \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{crypt_8c_ae7357528156b2ef267ac89ea1f0fd8ce}\label{crypt_8c_ae7357528156b2ef267ac89ea1f0fd8ce}} 
+\index{crypt.c@{crypt.c}!encryption@{encryption}}
+\index{encryption@{encryption}!crypt.c@{crypt.c}}
+\doxysubsubsection{\texorpdfstring{encryption()}{encryption()}}
+{\footnotesize\ttfamily void encryption (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename,  }\item[{const unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+AES-\/256 encryption in CBC (Cipher Block Chaining) mode. 
+
+Conceptual Algorithm for {\ttfamily encryption} Function\+:
+
+
+\begin{DoxyEnumerate}
+\item Setup\+:
+\begin{DoxyItemize}
+\item Prepare the encryption key ({\ttfamily encryption\+\_\+key}) using the provided {\ttfamily key}.
+\item Create a new filename by appending \char`\"{}.\+enc\char`\"{} to the original {\ttfamily filename}.
+\item Open the input file ({\ttfamily file}) for reading and the output file ({\ttfamily enc\+\_\+file}) for writing.
+\item Generate a random Initialization Vector (IV) to ensure secure encryption.
+\end{DoxyItemize}
+\item Encryption\+:
+\begin{DoxyItemize}
+\item Write the IV to the beginning of the output file.
+\item Read the input file in blocks of {\ttfamily AES\+\_\+\+BLOCK\+\_\+\+SIZE}.
+\item For each block\+:
+\begin{DoxyItemize}
+\item Encrypt the block using AES-\/256 in CBC mode with the {\ttfamily encryption\+\_\+key} and the IV.
+\item Write the encrypted block to the output file.
+\end{DoxyItemize}
+\end{DoxyItemize}
+\item Cleanup\+:
+\begin{DoxyItemize}
+\item Close both input and output files.
+\item Print a success message.
+\end{DoxyItemize}
+\end{DoxyEnumerate}
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & The name of the file to encrypt. \\
+\hline
+{\em key} & The encryption key (256 bits). \\
+\hline
+\end{DoxyParams}

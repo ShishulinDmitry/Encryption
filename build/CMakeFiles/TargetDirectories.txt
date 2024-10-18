@@ -1,0 +1,3 @@
+/home/cerberus/lab2/build/CMakeFiles/encryption.dir
+/home/cerberus/lab2/build/CMakeFiles/edit_cache.dir
+/home/cerberus/lab2/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,29 @@
+\hypertarget{keygen_8h}{}\doxysection{libs/keygen.h File Reference}
+\label{keygen_8h}\index{libs/keygen.h@{libs/keygen.h}}
+This graph shows which files directly or indirectly include this file\+:
+% FIG 0
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{keygen_8h_a3de7d6d7d317bcc0fe26b05fb470bf39}{generate}} (const char $\ast$passwd, unsigned char $\ast$key)
+\begin{DoxyCompactList}\small\item\em The function is responsible for generating a cryptographic key from a given password using the PBKDF2 (Password-\/\+Based Key Derivation Function 2) algorithm. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{keygen_8h_a3de7d6d7d317bcc0fe26b05fb470bf39}\label{keygen_8h_a3de7d6d7d317bcc0fe26b05fb470bf39}} 
+\index{keygen.h@{keygen.h}!generate@{generate}}
+\index{generate@{generate}!keygen.h@{keygen.h}}
+\doxysubsubsection{\texorpdfstring{generate()}{generate()}}
+{\footnotesize\ttfamily void generate (\begin{DoxyParamCaption}\item[{const char $\ast$}]{passwd,  }\item[{unsigned char $\ast$}]{key }\end{DoxyParamCaption})}
+
+
+
+The function is responsible for generating a cryptographic key from a given password using the PBKDF2 (Password-\/\+Based Key Derivation Function 2) algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em passwd} & The password string to derive the key from \\
+\hline
+{\em key} & The pointer to an unsigned char array where the generated key will be stored \\
+\hline
+\end{DoxyParams}
