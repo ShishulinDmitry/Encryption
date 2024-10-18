@@ -149,7 +149,7 @@ void decryption(const char* filename, const unsigned char* key)
         return;
     }
 
-    FILE* dec_file = fopen(new_filename, "ab+");
+    FILE* dec_file = fopen(new_filename, "wb");
     if (!dec_file)
     {
         strcat(error_msg, new_filename);
